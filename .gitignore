@@ -1,0 +1,7 @@
+.idea
+.hint
+*build*
+
+*.pro.user
+
+exprtk_*.cpp
