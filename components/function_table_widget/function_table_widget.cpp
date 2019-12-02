@@ -13,12 +13,6 @@ FunctionTableWidget::FunctionTableWidget(QWidget *parent) : QTableWidget(parent)
 	append();
 
 	connect(this, &FunctionTableWidget::itemChanged, this, &FunctionTableWidget::on_tableWidget_itemChanged);
-
-	symbolTable.add_variable("x", x);
-	symbolTable.add_variable("y", y);
-	symbolTable.add_constants();
-
-	expression.register_symbol_table(symbolTable);
 }
 
 void FunctionTableWidget::append() {
@@ -45,7 +39,8 @@ void FunctionTableWidget::on_tableWidget_itemChanged(QTableWidgetItem* item) {
 		return;
 	}
 
-	if (!parser.compile(input.toStdString(), expression)) {
+	Function function;
+	if (!function.set_expression(input.toStdString())) {
 		QMessageBox::critical(this, "Error",
 			"An error was occurred while parsing mathematical expression. "
 			"Please, input the valid mathematical expression."

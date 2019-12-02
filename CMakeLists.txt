@@ -39,6 +39,9 @@ set(
 	components/draw_label/draw_label.cpp
 	components/function_table_widget/function_table_widget.cpp
 	mainwindow.cpp
+	math/expression/expression.cpp
+	math/function/funciton.cpp
+	math/function_parser/function_parser.cpp
 )
 
 set(
@@ -46,8 +49,12 @@ set(
 	components/color_label/color_label.hpp
 	components/draw_label/draw_label.hpp
 	components/function_table_widget/function_table_widget.hpp
-	exprtk/exprtk.hpp
 	mainwindow.hpp
+	math/expression/expression.hpp
+	math/exprtk/exprtk.hpp
+	math/function/function.hpp
+	math/function_parser/function_parser.hpp
+	math/surface/surface.hpp
 	math/vector/vector.hpp
 	math/vector/vector3d.hpp
 )

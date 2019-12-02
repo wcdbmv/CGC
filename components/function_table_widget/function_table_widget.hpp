@@ -4,7 +4,7 @@
 #include <QTableWidget>
 #include <QVector>
 #include <QVBoxLayout>
-#include "../../exprtk/exprtk.hpp"
+#include "../../math/function/function.hpp"
 
 class FunctionTableWidget : public QTableWidget {
 	Q_OBJECT
@@ -18,11 +18,6 @@ private slots:
 
 private:
 	QVector<QString> functions;
-
-	exprtk::symbol_table<double> symbolTable;
-	exprtk::expression<double> expression;
-	exprtk::parser<double> parser;
-	double x, y;
 
 	static const QVector<QColor> DEFAULT_COLORS;
 	static const QStringList HEADER_LABELS;
