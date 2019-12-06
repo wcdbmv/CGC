@@ -38,10 +38,12 @@ set(
 	components/color_label/color_label.cpp
 	components/draw_label/draw_label.cpp
 	components/function_table_widget/function_table_widget.cpp
-	mainwindow.cpp
 	math/expression/expression.cpp
 	math/function/funciton.cpp
 	math/function_parser/function_parser.cpp
+	math/range/range.cpp
+	math/surface/surface.cpp
+	mainwindow.cpp
 )
 
 set(
@@ -49,14 +51,17 @@ set(
 	components/color_label/color_label.hpp
 	components/draw_label/draw_label.hpp
 	components/function_table_widget/function_table_widget.hpp
-	mainwindow.hpp
 	math/expression/expression.hpp
 	math/exprtk/exprtk.hpp
 	math/function/function.hpp
 	math/function_parser/function_parser.hpp
+	math/global/global.hpp
+	math/range/range.hpp
+	math/region/region.hpp
 	math/surface/surface.hpp
 	math/vector/vector.hpp
 	math/vector/vector3d.hpp
+	mainwindow.hpp
 )
 
 add_executable(CGC ${SOURCES} ${HEADERS} main.cpp)

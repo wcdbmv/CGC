@@ -16,6 +16,7 @@ public:
 	~MainWindow() noexcept override;
 
 private slots:
+	void on_plotPushButton_clicked();
 	void on_clearAllPushButton_clicked();
 
 private:

@@ -11,13 +11,19 @@ class FunctionTableWidget : public QTableWidget {
 public:
 	explicit FunctionTableWidget(QWidget* parent = nullptr);
 
+	Function& function(int row);
+
+public slots:
 	void append();
+	void remove();
+	void truncate();
 
 private slots:
 	void on_tableWidget_itemChanged(QTableWidgetItem *item);
 
 private:
-	QVector<QString> functions;
+	QVector<QString> functions_strings;
+	QVector<Function> functions;
 
 	static const QVector<QColor> DEFAULT_COLORS;
 	static const QStringList HEADER_LABELS;

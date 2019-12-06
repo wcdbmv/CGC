@@ -15,8 +15,13 @@ FunctionTableWidget::FunctionTableWidget(QWidget *parent) : QTableWidget(parent)
 	connect(this, &FunctionTableWidget::itemChanged, this, &FunctionTableWidget::on_tableWidget_itemChanged);
 }
 
+Function& FunctionTableWidget::function(int row) {
+	return functions[row];
+}
+
 void FunctionTableWidget::append() {
-	functions.push_back("");
+	functions.push_back(Function());
+	functions_strings.push_back("");
 
 	const auto row = rowCount();
 	insertRow(row);
@@ -30,24 +35,38 @@ void FunctionTableWidget::append() {
 	colorItem->setBackground(DEFAULT_COLORS[row % DEFAULT_COLORS.size()]);
 }
 
+void FunctionTableWidget::remove() {
+	QModelIndexList selected = selectionModel()->selectedRows();
+	for (auto select = selected.rbegin(); select != selected.rend(); ++select) {
+		const int row = select->row();
+		removeRow(row);
+		functions.remove(row);
+		functions_strings.remove(row);
+	}
+}
+
+void FunctionTableWidget::truncate() {
+
+}
+
 void FunctionTableWidget::on_tableWidget_itemChanged(QTableWidgetItem* item) {
 	const auto input = item->text().trimmed();
 	const auto row = item->row();
 
 	if (input.isEmpty()) {
-		functions[row] = input;
+		functions[row] = Function();
+		functions_strings[row] = "";
 		return;
 	}
 
-	Function function;
-	if (!function.set_expression(input.toStdString())) {
+	if (!functions[row].set_expression(input.toStdString())) {
 		QMessageBox::critical(this, "Error",
 			"An error was occurred while parsing mathematical expression. "
 			"Please, input the valid mathematical expression."
 		);
-		item->setText(functions[row]);
+		item->setText(functions_strings[row]);
 		return;
 	}
 
-	functions[row] = input;
+	functions_strings[row] = input;
 }
