@@ -2,9 +2,9 @@
 #define MATH_SURFACE_SURFACE_HPP_
 
 #include <vector>
-#include "../function/function.hpp"
-#include "../region/region.hpp"
-#include "../vector/vector3d.hpp"
+#include "function/function/function.hpp"
+#include "math/region/region.hpp"
+#include "math/vector/vector3d.hpp"
 
 class Surface {
 public:

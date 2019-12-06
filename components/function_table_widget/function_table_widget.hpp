@@ -4,7 +4,7 @@
 #include <QTableWidget>
 #include <QVector>
 #include <QVBoxLayout>
-#include "../../math/function/function.hpp"
+#include "function/function/function.hpp"
 
 class FunctionTableWidget : public QTableWidget {
 	Q_OBJECT

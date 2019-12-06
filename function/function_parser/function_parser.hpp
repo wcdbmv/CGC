@@ -1,7 +1,7 @@
-#ifndef MATH_FUNCTION_PARSER_FUNCTION_PARSER_HPP_
-#define MATH_FUNCTION_PARSER_FUNCTION_PARSER_HPP_
+#ifndef FUNCTION_FUNCTION_PARSER_FUNCTION_PARSER_HPP_
+#define FUNCTION_FUNCTION_PARSER_FUNCTION_PARSER_HPP_
 
-#include "../expression/expression.hpp"
+#include "function/expression/expression.hpp"
 
 class FunctionParser {
 public:
@@ -17,4 +17,4 @@ private:
 	static exprtk::parser<double>& parser();
 };
 
-#endif  // MATH_FUNCTION_PARSER_FUNCTION_PARSER_HPP_
+#endif  // FUNCTION_FUNCTION_PARSER_FUNCTION_PARSER_HPP_

@@ -28,9 +28,9 @@ SOURCES += \
 	components/color_label/color_label.cpp \
 	components/draw_label/draw_label.cpp \
 	components/function_table_widget/function_table_widget.cpp \
-	math/expression/expression.cpp \
-	math/function/funciton.cpp \
-	math/function_parser/function_parser.cpp \
+	function/expression/expression.cpp \
+	function/function/funciton.cpp \
+	function/function_parser/function_parser.cpp \
 	math/range/range.cpp \
 	math/surface/surface.cpp \
 	main.cpp \
@@ -40,10 +40,10 @@ HEADERS += \
 	components/color_label/color_label.hpp \
 	components/draw_label/draw_label.hpp \
 	components/function_table_widget/function_table_widget.hpp \
-	math/expression/expression.hpp \
-	math/exprtk/exprtk.hpp \
-	math/function/function.hpp \
-	math/function_parser/function_parser.hpp \
+	function/expression/expression.hpp \
+	function/exprtk/exprtk.hpp \
+	function/function/function.hpp \
+	function/function_parser/function_parser.hpp \
 	math/global/global.hpp \
 	math/range/range.hpp \
 	math/region/region.hpp \

@@ -1,7 +1,7 @@
-#ifndef MATH_EXPRESSION_EXPRESSION_HPP_
-#define MATH_EXPRESSION_EXPRESSION_HPP_
+#ifndef FUNCTION_EXPRESSION_EXPRESSION_HPP_
+#define FUNCTION_EXPRESSION_EXPRESSION_HPP_
 
-#include "../exprtk/exprtk.hpp"
+#include "function/exprtk/exprtk.hpp"
 
 class Expression {
 public:
@@ -21,4 +21,4 @@ private:
 	exprtk::expression<double> expression_;
 };
 
-#endif  // MATH_EXPRESSION_EXPRESSION_HPP_
+#endif  // FUNCTION_EXPRESSION_EXPRESSION_HPP_

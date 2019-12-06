@@ -1,7 +1,7 @@
-#ifndef MATH_FUNCTION_FUNCTION_HPP_
-#define MATH_FUNCTION_FUNCTION_HPP_
+#ifndef FUNCTION_FUNCTION_FUNCTION_HPP_
+#define FUNCTION_FUNCTION_FUNCTION_HPP_
 
-#include "../function_parser/function_parser.hpp"
+#include "function/function_parser/function_parser.hpp"
 
 class Function {
 public:
@@ -15,4 +15,4 @@ private:
 	Expression expression_;
 };
 
-#endif  // MATH_FUNCTION_FUNCTION_HPP_
+#endif  // FUNCTION_FUNCTION_FUNCTION_HPP_

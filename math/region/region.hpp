@@ -1,7 +1,7 @@
 #ifndef MATH_REGION_REGION_HPP_
 #define MATH_REGION_REGION_HPP_
 
-#include "../range/range.hpp"
+#include "math/range/range.hpp"
 
 struct Region {
 	Range x;
