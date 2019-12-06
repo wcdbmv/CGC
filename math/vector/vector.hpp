@@ -46,9 +46,11 @@ public:
 	constexpr value_type sum() const;
 	static constexpr value_type dot(const Vector& lhs, const Vector& rhs) noexcept;
 
-	std::enable_if_t<std::is_integral_v<T>, double> length() const;
+	template <typename _T = T>
+	std::enable_if_t<std::is_integral_v<_T>, double> length() const;
 
-	std::enable_if_t<std::is_floating_point_v<T>> normalize();
+	template <typename _T = T>
+	std::enable_if_t<std::is_floating_point_v<_T>> normalize();
 
 	template <std::size_t _Size, typename _T>
 	friend constexpr Vector<_Size, _T> operator+(Vector<_Size, _T> lhs, const Vector<_Size, _T>& rhs) noexcept;
@@ -217,12 +219,14 @@ constexpr auto Vector<Size, T>::dot(const Vector& lhs, const Vector& rhs) noexce
 }
 
 template <std::size_t Size, typename T>
-auto Vector<Size, T>::length() const -> std::enable_if_t<std::is_integral_v<T>, double> {
+template <typename _T>
+auto Vector<Size, T>::length() const -> std::enable_if_t<std::is_integral_v<_T>, double> {
 	return std::sqrt(dot(*this, *this));
 }
 
 template <std::size_t Size, typename T>
-std::enable_if_t<std::is_floating_point_v<T>> Vector<Size, T>::normalize() {
+template <typename _T>
+auto Vector<Size, T>::normalize() -> std::enable_if_t<std::is_floating_point_v<_T>>{
 	*this *= 1.0 / length();
 }
 
@@ -257,7 +261,7 @@ constexpr Vector<Size, T> operator*(double lhs, Vector<Size, T> rhs) noexcept {
 }
 
 template <std::size_t Size, typename T>
-constexpr Vector<Size, T> operator/(Vector<Size, T> lhs, double rhs) noexcept {
+constexpr Vector<Size, T> operator/(Vector<Size, T> lhs, double rhs) {
 	return lhs /= rhs;
 }
 
