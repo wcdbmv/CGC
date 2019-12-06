@@ -43,6 +43,7 @@ set(
 	function/function_parser/function_parser.cpp
 	math/range/range.cpp
 	math/surface/surface.cpp
+	object/edge/edge.cpp
 	object/vertex/vertex.cpp
 	mainwindow.cpp
 )
@@ -62,8 +63,10 @@ set(
 	math/surface/surface.hpp
 	math/vector/vector.hpp
 	math/vector/vector3d.hpp
+	object/edge/edge.hpp
 	object/face/face.hpp
-	object/face/face3.hpp
+	object/face/triangle_face.hpp
+	object/mesh/mesh.hpp
 	object/vertex/vertex.hpp
 	mainwindow.hpp
 )
