@@ -33,6 +33,7 @@ SOURCES += \
 	function/function_parser/function_parser.cpp \
 	math/range/range.cpp \
 	math/surface/surface.cpp \
+	object/vertex/vertex.cpp \
 	main.cpp \
 	mainwindow.cpp
 
@@ -50,6 +51,9 @@ HEADERS += \
 	math/surface/surface.hpp \
 	math/vector/vector.hpp \
 	math/vector/vector3d.hpp \
+	object/face/face.hpp \
+	object/face/face3.hpp \
+	object/vertex/vertex.hpp \
 	mainwindow.hpp
 
 FORMS += \
