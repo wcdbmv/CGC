@@ -32,9 +32,7 @@ SOURCES += \
 	function/function/funciton.cpp \
 	function/function_parser/function_parser.cpp \
 	math/range/range.cpp \
-	math/surface/surface.cpp \
 	object/edge/edge.cpp \
-	object/vertex/vertex.cpp \
 	main.cpp \
 	mainwindow.cpp
 
@@ -47,9 +45,9 @@ HEADERS += \
 	function/function/function.hpp \
 	function/function_parser/function_parser.hpp \
 	math/global/global.hpp \
+	math/grid/grid.hpp \
 	math/range/range.hpp \
 	math/region/region.hpp \
-	math/surface/surface.hpp \
 	math/vector/vector.hpp \
 	math/vector/vector3d.hpp \
 	object/edge/edge.hpp \
@@ -57,6 +55,7 @@ HEADERS += \
 	object/face/triangle_face.hpp \
 	object/mesh/mesh.hpp \
 	object/vertex/vertex.hpp \
+	surface/surface.hpp \
 	mainwindow.hpp
 
 FORMS += \

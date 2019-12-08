@@ -20,7 +20,13 @@ public:
 public:
 	constexpr Vertex() noexcept = default;
 	constexpr explicit Vertex(const value_type& value) noexcept;
-	constexpr Vertex(const value_type& x, const value_type& y, const value_type& z = 0) noexcept;
+	constexpr Vertex(const value_type& x, const value_type& y, const value_type& z) noexcept;
 };
+
+inline constexpr Vertex::Vertex(const value_type& value) noexcept
+	: Base(value) {}
+
+inline constexpr Vertex::Vertex(const value_type& x, const value_type& y, const value_type& z) noexcept
+	: Base(x, y, z) {}
 
 #endif  // OBJECT_VERTEX_VERTEX_HPP_

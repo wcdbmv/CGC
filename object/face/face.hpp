@@ -28,6 +28,11 @@ public:
 	constexpr iterator end() noexcept;
 	constexpr const_iterator end() const noexcept;
 
+	constexpr reference operator[](size_type index);
+	constexpr const_reference operator[](size_type index) const;
+	reference at(size_type index);
+	[[nodiscard]] const_reference at(size_type index) const;
+
 private:
 	std::array<size_t, VerticesCount> vertex_index_;
 };
@@ -66,6 +71,34 @@ constexpr auto Face<VerticesCount>::end() noexcept -> iterator {
 template <size_t VerticesCount>
 constexpr auto Face<VerticesCount>::end() const noexcept -> const_iterator {
 	return vertex_index_.end();
+}
+
+template <size_t VerticesCount>
+constexpr auto Face<VerticesCount>::operator[](size_type index) -> reference {
+	return vertex_index_[index];
+}
+
+template <size_t VerticesCount>
+constexpr auto Face<VerticesCount>::operator[](size_type index) const -> const_reference {
+	return vertex_index_[index];
+}
+
+template <size_t VerticesCount>
+auto Face<VerticesCount>::at(size_type index) -> reference {
+	if (index >= VerticesCount) {
+		throw std::out_of_range("Face::at");
+	}
+
+	return vertex_index_[index];
+}
+
+template <size_t VerticesCount>
+auto Face<VerticesCount>::at(size_type index) const -> const_reference {
+	if (index >= VerticesCount) {
+		throw std::out_of_range("Face::at");
+	}
+
+	return vertex_index_[index];
 }
 
 #endif  // OBJECT_FACE_FACE_HPP_
