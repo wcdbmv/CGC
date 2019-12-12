@@ -32,7 +32,6 @@ SOURCES += \
 	function/function/funciton.cpp \
 	function/function_parser/function_parser.cpp \
 	math/range/range.cpp \
-	object/edge/edge.cpp \
 	main.cpp \
 	mainwindow.cpp
 

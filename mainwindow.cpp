@@ -30,13 +30,14 @@ void MainWindow::on_plotPushButton_clicked() {
 	};
 	auto mesh = Surface::build(function, grid);
 
-	qDebug() << "faces";
-	for (auto&& f: mesh.faces) {
-		const auto v1 = mesh.vertices[f[0]];
-		const auto v2 = mesh.vertices[f[1]];
-		const auto v3 = mesh.vertices[f[2]];
-		qDebug() << '(' << v1.x() <<  v1.y() << v1.z() << ')' << '(' << v2.x() <<  v2.y() << v2.z() << ')' << '(' << v3.x() <<  v3.y() << v3.z() << ')';
+	qDebug() << "edges";
+	for (auto&& e: mesh.edges) {
+		const auto v1 = mesh.vertices.at(e.p1());
+		const auto v2 = mesh.vertices.at(e.p2());
+		qDebug() << '(' << v1.x() <<  v1.y() << v1.z() << ')' << '(' << v2.x() <<  v2.y() << v2.z() << ')';
 	}
+
+	qDebug() << mesh.vertices.size() << mesh.edges.size() << mesh.faces.size();
 }
 
 void MainWindow::on_clearAllPushButton_clicked() {
