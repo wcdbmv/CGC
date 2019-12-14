@@ -1,5 +1,5 @@
-#ifndef MATH_VECTOR_VECTOR4D_HPP_
-#define MATH_VECTOR_VECTOR4D_HPP_
+#ifndef MATH_VECTOR_HOMOGENEOUS_VECTOR_3D_HPP_
+#define MATH_VECTOR_HOMOGENEOUS_VECTOR_3D_HPP_
 
 #include "vector.hpp"
 
@@ -21,7 +21,8 @@ public:
 public:
 	constexpr HomogeneousVector3D() noexcept;
 	constexpr explicit HomogeneousVector3D(const value_type& value) noexcept;
-	constexpr HomogeneousVector3D(const value_type& x, const value_type& y, const value_type& z = 0) noexcept;
+	constexpr HomogeneousVector3D(const value_type& x, const value_type& y, const value_type& z) noexcept;
+	constexpr HomogeneousVector3D(const Vector<3, T>& rhs) noexcept;
 	constexpr HomogeneousVector3D(std::initializer_list<value_type> list) noexcept;
 
 	reference x() noexcept;
@@ -33,11 +34,11 @@ public:
 	reference w() noexcept;
 	constexpr const_reference w() const noexcept;
 
-	T Length();
-	void Normalize();
+	value_type length3d() const;
+	void normalize3d();
 
-	static T Dot(const HomogeneousVector3D&, const HomogeneousVector3D&);
-	static HomogeneousVector3D Cross(const HomogeneousVector3D&, const HomogeneousVector3D&);
+	static value_type dot3d(const HomogeneousVector3D&, const HomogeneousVector3D&);
+	static HomogeneousVector3D cross3d(const HomogeneousVector3D&, const HomogeneousVector3D&);
 };
 
 
@@ -51,6 +52,10 @@ constexpr HomogeneousVector3D<T>::HomogeneousVector3D(const value_type& value) n
 template <typename T>
 constexpr HomogeneousVector3D<T>::HomogeneousVector3D(const value_type& x, const value_type& y, const value_type& z) noexcept
 		: Base{x, y, z, 1} {}
+
+template <typename T>
+constexpr HomogeneousVector3D<T>::HomogeneousVector3D(const Vector<3, T>& rhs) noexcept
+		: Base{rhs[0], rhs[1], rhs[2], 1} {}
 
 template <typename T>
 constexpr HomogeneousVector3D<T>::HomogeneousVector3D(std::initializer_list<value_type> list) noexcept
@@ -97,7 +102,7 @@ constexpr auto HomogeneousVector3D<T>::w() const noexcept -> const_reference {
 }
 
 template <typename T>
-T HomogeneousVector3D<T>::Length() {
+auto HomogeneousVector3D<T>::length3d() const -> value_type {
 	const auto x = (*this)[0];
 	const auto y = (*this)[1];
 	const auto z = (*this)[2];
@@ -106,20 +111,21 @@ T HomogeneousVector3D<T>::Length() {
 }
 
 template <typename T>
-void HomogeneousVector3D<T>::Normalize() {
-	const T norm = 1 / Length();
+void HomogeneousVector3D<T>::normalize3d() {
+	const T norm = 1 / length3d();
 
-	for (std::size_t i = 0; i < Vector<4, T>::size() - 1; ++i)
+	for (std::size_t i = 0; i < Base::size() - 1; ++i) {
 		(*this)[i] *= norm;
+	}
 }
 
 template <typename T>
-T HomogeneousVector3D<T>::Dot(const HomogeneousVector3D<T>& v1, const HomogeneousVector3D<T>& v2) {
+auto HomogeneousVector3D<T>::dot3d(const HomogeneousVector3D<T>& v1, const HomogeneousVector3D<T>& v2) -> value_type {
 	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
 
 template <typename T>
-HomogeneousVector3D<T> HomogeneousVector3D<T>::Cross(const HomogeneousVector3D<T>& v1, const HomogeneousVector3D<T>& v2) {
+auto HomogeneousVector3D<T>::cross3d(const HomogeneousVector3D<T>& v1, const HomogeneousVector3D<T>& v2) -> HomogeneousVector3D {
 	HomogeneousVector3D<T> result;
 
 	result[0] = v1[2] * v2[1] - v1[1] * v2[2];
@@ -131,4 +137,4 @@ HomogeneousVector3D<T> HomogeneousVector3D<T>::Cross(const HomogeneousVector3D<T
 }
 
 
-#endif  // MATH_VECTOR_VECTOR4D_HPP_
+#endif  // MATH_VECTOR_HOMOGENEOUS_VECTOR_3D_HPP_

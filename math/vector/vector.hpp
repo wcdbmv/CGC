@@ -24,6 +24,9 @@ public:
 	constexpr explicit Vector(const value_type& value) noexcept;
 	constexpr Vector(std::initializer_list<value_type> list) noexcept;
 
+	template <std::size_t OtherSize>
+	constexpr Vector(const Vector<OtherSize, T>& rhs) noexcept;
+
 	constexpr iterator begin() noexcept;
 	constexpr const_iterator begin() const noexcept;
 	constexpr iterator end() noexcept;
@@ -52,6 +55,8 @@ public:
 
 	template <typename _T = T>
 	std::enable_if_t<std::is_floating_point_v<_T>> normalize();
+
+	constexpr Vector<Size + 1, T> to_homogeneous() const noexcept;
 
 	template <std::size_t _Size, typename _T>
 	friend constexpr Vector<_Size, _T> operator+(Vector<_Size, _T> lhs, const Vector<_Size, _T>& rhs) noexcept;
@@ -105,6 +110,20 @@ constexpr Vector<Size, T>::Vector(std::initializer_list<value_type> list) noexce
 		++first, ++list_first
 	) {
 		*first = *list_first;
+	}
+}
+
+template <std::size_t Size, typename T>
+template <std::size_t OtherSize>
+constexpr Vector<Size, T>::Vector(const Vector<OtherSize, T>& rhs) noexcept
+		: Vector() {
+	auto first = begin(), last = end();
+	for (
+		auto rhs_first = rhs.begin(), rhs_last = rhs.end();
+		first != last && rhs_first != rhs_last;
+		++first, ++rhs_first
+	) {
+		*first = *rhs_first;
 	}
 }
 
@@ -236,6 +255,13 @@ template <std::size_t Size, typename T>
 template <typename _T>
 auto Vector<Size, T>::normalize() -> std::enable_if_t<std::is_floating_point_v<_T>>{
 	*this *= 1.0 / length();
+}
+
+template <std::size_t Size, typename T>
+constexpr auto Vector<Size, T>::to_homogeneous() const noexcept -> Vector<Size + 1, T> {
+	auto homogeneous = Vector<Size + 1, T>(*this);
+	homogeneous[Size] = 1;
+	return homogeneous;
 }
 
 template <std::size_t Size, typename T>

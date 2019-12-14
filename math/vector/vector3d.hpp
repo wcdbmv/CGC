@@ -23,6 +23,9 @@ public:
 	constexpr explicit Vector3D(const value_type& value) noexcept;
 	constexpr Vector3D(const value_type& x, const value_type& y, const value_type& z = 0) noexcept;
 
+	template <std::size_t OtherSize>
+	constexpr Vector3D(const Vector<OtherSize, T>& rhs) noexcept;
+
 	reference x() noexcept;
 	constexpr const_reference x() const noexcept;
 	reference y() noexcept;
@@ -33,6 +36,7 @@ public:
 	static constexpr Vector3D cross(const Base& lhs, const Base& rhs) noexcept;
 };
 
+
 template <typename T>
 constexpr Vector3D<T>::Vector3D(const value_type& value) noexcept
 		: Base(value) {}
@@ -40,6 +44,11 @@ constexpr Vector3D<T>::Vector3D(const value_type& value) noexcept
 template <typename T>
 constexpr Vector3D<T>::Vector3D(const value_type& x, const value_type& y, const value_type& z) noexcept
 		: Base{x, y, z} {}
+
+template <typename T>
+template <std::size_t OtherSize>
+constexpr Vector3D<T>::Vector3D(const Vector<OtherSize, T>& rhs) noexcept
+		: Base(rhs) {}
 
 template <typename T>
 auto Vector3D<T>::x() noexcept -> reference {
