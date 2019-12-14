@@ -21,12 +21,17 @@ public:
 	constexpr Vertex() noexcept = default;
 	constexpr explicit Vertex(const value_type& value) noexcept;
 	constexpr Vertex(const value_type& x, const value_type& y, const value_type& z) noexcept;
+	constexpr Vertex(const Vector<3, double>& other) noexcept;
 };
 
+
 inline constexpr Vertex::Vertex(const value_type& value) noexcept
-	: Base(value) {}
+		: Base(value) {}
 
 inline constexpr Vertex::Vertex(const value_type& x, const value_type& y, const value_type& z) noexcept
-	: Base(x, y, z) {}
+		: Base(x, y, z) {}
+
+inline constexpr Vertex::Vertex(const Vector<3, double>& other) noexcept
+		: Base(other[0], other[1], other[2]) {}
 
 #endif  // OBJECT_VERTEX_VERTEX_HPP_

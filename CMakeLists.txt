@@ -42,6 +42,10 @@ set(
 	function/function/funciton.cpp
 	function/function_parser/function_parser.cpp
 	math/range/range.cpp
+	math/transformation/dimensional_transformations.cpp
+	math/transformation/transformation.cpp
+	math/transformation/transformation_interface.cpp
+	object/camera/camera.cpp
 	mainwindow.cpp
 )
 
@@ -56,10 +60,18 @@ set(
 	function/function_parser/function_parser.hpp
 	math/global/global.hpp
 	math/grid/grid.hpp
+	math/matrix/matrix.hpp
+	math/matrix/matrix4x4.hpp
+	math/matrix/rectangular_matrix.hpp
 	math/range/range.hpp
 	math/region/region.hpp
+	math/transformation/dimensional_transformations.hpp
+	math/transformation/transformation.hpp
+	math/transformation/transformation_interface.hpp
+	math/vector/homogeneous_vector3d.hpp
 	math/vector/vector.hpp
 	math/vector/vector3d.hpp
+	object/camera/camera.hpp
 	object/edge/edge.hpp
 	object/face/face.hpp
 	object/face/triangle_face.hpp

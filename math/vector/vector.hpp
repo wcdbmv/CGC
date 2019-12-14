@@ -2,7 +2,8 @@
 #define MATH_VECTOR_VECTOR_HPP_
 
 #include <initializer_list>
-#include <iostream>
+#include <istream>
+#include <ostream>
 
 template <std::size_t Size, typename T>
 class Vector {
@@ -78,24 +79,31 @@ protected:
 	T data_[Size];
 };
 
+
 #include <cmath>
 #include <experimental/iterator>
 #include <numeric>
 
 template <std::size_t Size, typename T>
 constexpr Vector<Size, T>::Vector() noexcept
-	: data_{} {}
+		: data_{} {}
 
 template <std::size_t Size, typename T>
-constexpr Vector<Size, T>::Vector(const value_type& value) noexcept : Vector() {
+constexpr Vector<Size, T>::Vector(const value_type& value) noexcept
+		: Vector() {
 	fill(value);
 }
 
 template <std::size_t Size, typename T>
-constexpr Vector<Size, T>::Vector(std::initializer_list<value_type> list) noexcept : Vector() {
+constexpr Vector<Size, T>::Vector(std::initializer_list<value_type> list) noexcept
+		: Vector() {
 	// std::copy_n(list.begin(), min(size(), list.size()), begin());
 	auto first = begin(), last = end();
-	for (auto list_first = list.begin(), list_last = list.end(); first != last && list_first != list_last; ++first, ++list_first) {
+	for (
+		auto list_first = list.begin(), list_last = list.end();
+		first != last && list_first != list_last;
+		++first, ++list_first
+	) {
 		*first = *list_first;
 	}
 }
