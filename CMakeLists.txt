@@ -46,6 +46,7 @@ set(
 	math/transformation/transformation.cpp
 	math/transformation/transformation_interface.cpp
 	object/camera/camera.cpp
+	surface/surface.cpp
 	mainwindow.cpp
 )
 
@@ -77,6 +78,7 @@ set(
 	object/face/triangle_face.hpp
 	object/mesh/mesh.hpp
 	object/vertex/vertex.hpp
+	scene/scene.hpp
 	surface/surface.hpp
 	mainwindow.hpp
 )

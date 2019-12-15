@@ -36,6 +36,7 @@ SOURCES += \
 	math/transformation/transformation.cpp \
 	math/transformation/transformation_interface.cpp \
 	object/camera/camera.cpp \
+	surface/surface.cpp \
 	main.cpp \
 	mainwindow.cpp
 
@@ -66,6 +67,7 @@ HEADERS += \
 	object/face/triangle_face.hpp \
 	object/mesh/mesh.hpp \
 	object/vertex/vertex.hpp \
+	scene/scene.hpp \
 	surface/surface.hpp \
 	mainwindow.hpp
 
