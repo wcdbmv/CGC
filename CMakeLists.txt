@@ -11,6 +11,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Threads REQUIRED)
 
 add_compile_options(
 	-Werror
@@ -88,3 +89,4 @@ add_executable(CGC ${SOURCES} ${HEADERS} main.cpp)
 target_link_libraries(${PROJECT_NAME} Qt5::Core)
 target_link_libraries(${PROJECT_NAME} Qt5::Gui)
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} Threads::Threads)

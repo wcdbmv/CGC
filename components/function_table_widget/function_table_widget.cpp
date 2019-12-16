@@ -46,7 +46,11 @@ void FunctionTableWidget::remove() {
 }
 
 void FunctionTableWidget::truncate() {
+	setRowCount(0);
+	functions.clear();
+	functions_strings.clear();
 
+	append();
 }
 
 void FunctionTableWidget::on_tableWidget_itemChanged(QTableWidgetItem* item) {

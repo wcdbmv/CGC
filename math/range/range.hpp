@@ -5,6 +5,7 @@
 
 class Range {
 public:
+	Range() noexcept;
 	Range(double left, double right, double delta);
 
 	[[nodiscard]] std::vector<double> range() const;

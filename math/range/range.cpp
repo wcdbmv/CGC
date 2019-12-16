@@ -4,6 +4,10 @@
 #include <limits>
 #include <stdexcept>
 
+
+Range::Range() noexcept
+		: left_(-5), right_(5), delta_(1) {}
+
 Range::Range(double left, double right, double delta) : left_(left), right_(right), delta_(delta) {
 	if (!check_range(left, right)) {
 		throw std::invalid_argument("Range::Range (right < left)");

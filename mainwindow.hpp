@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QImage>
 #include <QPixmap>
+#include "math/grid/grid.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -18,19 +19,16 @@ public:
 	~MainWindow() noexcept override;
 
 protected:
-	void mousePressEvent(QMouseEvent *event) override;
-	void mouseMoveEvent(QMouseEvent *event) override;
-	void wheelEvent(QWheelEvent *event) override;
-	void keyPressEvent(QKeyEvent *event) override;
-	void keyReleaseEvent(QKeyEvent *event) override;
+	void mousePressEvent(QMouseEvent* event) override;
+	void mouseMoveEvent(QMouseEvent* event) override;
+	void wheelEvent(QWheelEvent* event) override;
+	void keyPressEvent(QKeyEvent* event) override;
+	void keyReleaseEvent(QKeyEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
 
 private slots:
 	void on_plotPushButton_clicked();
 	void on_clearAllPushButton_clicked();
-
-private:
-	void clearImage();
-	void displayImage();
 
 private:
 	Ui::MainWindow* ui;
@@ -38,20 +36,37 @@ private:
 	QImage image;
 	QPixmap pixmap;
 	bool plotted;
+	void clearImage();
+	void displayImage();
 
-	bool zoom = true;
+	Grid grid;
+	void plot();
+	void clearAll();
 
+	const bool zoom = true;
 	int factor;
-	bool keyboard = true;
-	bool w, a, s, d, plus, minus;
+	void addZoom(int delta);
+	void checkZoom();
+
+	bool antialiasing = true;
+
+	const bool keyboard = true;
+	bool keyW, keyA, keyS, keyD, keyPlus, keyMinus;
 	void receiveKey(int key, bool value);
 
-	bool mouse = true;
+	const bool mouse = true;
 	QPoint drag;
-	double up = 0;
-	double right = 0;
+	double phi_x;
+	double phi_y;
+	double rotateDecelerationFactor = 64;
+	[[nodiscard]] bool checkMouse(QMouseEvent* event) const;
+	[[nodiscard]] bool checkWheel() const;
+	template <typename Event>
+	[[nodiscard]] bool checkMouseOnDrawLabel(Event* event) const;
 
+private:
 	static const QColor BG_COLOR;
+	static const int DEFAULT_ZOOM;
 };
 
 #endif  // MAINWINDOW_HPP_
