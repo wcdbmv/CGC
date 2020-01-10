@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget* parent) :
 
 	QThread::create([&] {
 		QTimer::singleShot(100, this, &MainWindow::on_clearAllPushButton_clicked);
+		ui->functionTableWidget->setColumnWidth(0, 271);
+		ui->functionTableWidget->setColumnWidth(1, 57);
 	})->start();
 }
 
