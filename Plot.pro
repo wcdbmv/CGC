@@ -28,6 +28,7 @@ SOURCES += \
 	components/color_label/color_label.cpp \
 	components/draw_label/draw_label.cpp \
 	components/function_table_widget/function_table_widget.cpp \
+	components/grid_widget/grid_widget.cpp \
 	function/expression/expression.cpp \
 	function/function/funciton.cpp \
 	function/function_parser/function_parser.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
 	components/color_label/color_label.hpp \
 	components/draw_label/draw_label.hpp \
 	components/function_table_widget/function_table_widget.hpp \
+	components/grid_widget/grid_widget.hpp \
 	function/expression/expression.hpp \
 	function/exprtk/exprtk.hpp \
 	function/function/function.hpp \
@@ -51,7 +53,7 @@ HEADERS += \
 	math/global/global.hpp \
 	math/grid/grid.hpp \
 	math/matrix/matrix.hpp \
-	math/matrix/matrix4x4.hpp \math/matrix/matrix4x4.hpp \
+	math/matrix/matrix4x4.hpp \
 	math/matrix/rectangular_matrix.hpp \
 	math/range/range.hpp \
 	math/region/region.hpp \
@@ -72,6 +74,7 @@ HEADERS += \
 	mainwindow.hpp
 
 FORMS += \
+	components/grid_widget/grid_widget.ui \
 	mainwindow.ui
 
 # Default rules for deployment.

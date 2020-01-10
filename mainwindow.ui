@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
+    <width>968</width>
     <height>680</height>
    </rect>
   </property>
@@ -21,17 +21,48 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="0" rowspan="3">
      <widget class="FunctionTableWidget" name="functionTableWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="6">
+    <item row="5" column="0">
+     <widget class="QPushButton" name="changeColorPushButton">
+      <property name="text">
+       <string>Change color</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QPushButton" name="removePushButton">
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="appendPushButton">
+      <property name="text">
+       <string>Append</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="plotPushButton">
+      <property name="text">
+       <string>Plot</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="9">
      <widget class="DrawLabel" name="drawLabel">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -41,38 +72,32 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
+    <item row="0" column="0">
+     <widget class="GridWidget" name="widget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>343</width>
+        <height>76</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>76</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
      <widget class="QPushButton" name="clearAllPushButton">
       <property name="text">
        <string>Clear all</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="removePushButton">
-      <property name="text">
-       <string>Remove</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="plotPushButton">
-      <property name="text">
-       <string>Plot</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QPushButton" name="changeColorPushButton">
-      <property name="text">
-       <string>Change color</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="appendPushButton">
-      <property name="text">
-       <string>Append</string>
       </property>
      </widget>
     </item>
@@ -83,7 +108,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>960</width>
+     <width>968</width>
      <height>22</height>
     </rect>
    </property>
@@ -115,6 +140,12 @@
    <class>DrawLabel</class>
    <extends>QLabel</extends>
    <header>components/draw_label/draw_label.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>GridWidget</class>
+   <extends>QWidget</extends>
+   <header>components/grid_widget/grid_widget.hpp</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

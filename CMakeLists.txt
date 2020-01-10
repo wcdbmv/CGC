@@ -39,6 +39,7 @@ set(
 	components/color_label/color_label.cpp
 	components/draw_label/draw_label.cpp
 	components/function_table_widget/function_table_widget.cpp
+	components/grid_widget/grid_widget.cpp
 	function/expression/expression.cpp
 	function/function/funciton.cpp
 	function/function_parser/function_parser.cpp
@@ -56,6 +57,7 @@ set(
 	components/color_label/color_label.hpp
 	components/draw_label/draw_label.hpp
 	components/function_table_widget/function_table_widget.hpp
+	components/grid_widget/grid_widget.hpp
 	function/expression/expression.hpp
 	function/exprtk/exprtk.hpp
 	function/function/function.hpp
