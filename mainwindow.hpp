@@ -37,7 +37,9 @@ private:
 
 	QImage image;
 	QPixmap pixmap;
-	bool plotted;
+	QVector<Mesh> plotted_meshes;
+	QVector<QColor> plotted_colors;
+	bool plotted() const;
 	void clearImage();
 	void displayImage();
 

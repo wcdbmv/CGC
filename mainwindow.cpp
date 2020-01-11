@@ -37,6 +37,8 @@ MainWindow::~MainWindow() noexcept {
 #include <QPainter>
 
 void MainWindow::on_plotPushButton_clicked() {
+	plotted_meshes.clear();
+	plotted_colors.clear();
 	plot();
 }
 
@@ -59,17 +61,21 @@ void MainWindow::plot() {
 
 	clearImage();
 
-	QModelIndexList selected = ui->functionTableWidget->selectionModel()->selectedRows();
-	for (auto select = selected.rbegin(); select != selected.rend(); ++select) {
-		const auto row = select->row();
-		auto function = ui->functionTableWidget->function(row);
-		const auto color = ui->functionTableWidget->color(row);
-		const auto mesh = Surface::build(function, grid);
-		plotMesh(mesh, view_matrix, color);
+	if (!plotted()) {
+		QModelIndexList selected = ui->functionTableWidget->selectionModel()->selectedRows();
+		for (auto&& select : selected) {
+			const auto row = select.row();
+			auto function = ui->functionTableWidget->function(row);
+			plotted_meshes.append(Surface::build(function, grid));
+			plotted_colors.append(ui->functionTableWidget->color(row));
+		}
+	}
+
+	for (int i = 0; i < plotted_meshes.size(); ++i) {
+		plotMesh(plotted_meshes[i], view_matrix, plotted_colors[i]);
 	}
 
 	displayImage();
-	plotted = true;
 }
 
 void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
@@ -94,6 +100,10 @@ void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix
 	}
 }
 
+bool MainWindow::plotted() const {
+	return !plotted_meshes.empty();
+}
+
 void MainWindow::clearImage() {
 	image = QImage(ui->drawLabel->size(), QImage::Format_RGB32);
 	image.fill(Qt::white);
@@ -105,7 +115,8 @@ void MainWindow::displayImage() {
 }
 
 void MainWindow::clearAll() {
-	plotted = false;
+	plotted_meshes.clear();
+	plotted_colors.clear();
 
 	clearImage();
 	displayImage();
@@ -132,11 +143,11 @@ void MainWindow::checkZoom() {
 }
 
 bool MainWindow::checkMouse(QMouseEvent* event) const {
-	return mouse && plotted && event->buttons() == Qt::LeftButton;
+	return mouse && plotted() && event->buttons() == Qt::LeftButton;
 }
 
 bool MainWindow::checkWheel() const {
-	return zoom && mouse && plotted;
+	return zoom && mouse && plotted();
 }
 
 template <typename Event>
@@ -163,7 +174,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event) {
 	phi_y += (drag.x() - event->x()) / rotateDecelerationFactor;
 	phi_x += (drag.y() - event->y()) / rotateDecelerationFactor;
 
-	on_plotPushButton_clicked();
+	plot();
 
 	drag = {event->x(), event->y()};
 }
@@ -175,11 +186,11 @@ void MainWindow::wheelEvent(QWheelEvent* event) {
 
 	addZoom(event->delta() / 64);
 
-	on_plotPushButton_clicked();
+	plot();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event) {
-	if (!keyboard || !plotted) {
+	if (!keyboard || !plotted()) {
 		return;
 	}
 
@@ -198,7 +209,7 @@ void MainWindow::keyPressEvent(QKeyEvent* event) {
 		if (keyMinus) addZoom(-delta_zoom);
 	}
 
-	on_plotPushButton_clicked();
+	plot();
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent* event) {
@@ -239,6 +250,5 @@ void MainWindow::receiveKey(int key, bool value) {
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
-	clearImage();
-	on_plotPushButton_clicked();
+	plot();
 }
