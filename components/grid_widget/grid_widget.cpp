@@ -10,3 +10,10 @@ GridWidget::GridWidget(QWidget *parent) :
 GridWidget::~GridWidget() {
 	delete ui;
 }
+
+Grid GridWidget::getGrid() const {
+	return {
+		Range(ui->xbDoubleSpinBox->value(), ui->xeDoubleSpinBox->value(), ui->dxDoubleSpinBox->value()),
+		Range(ui->ybDoubleSpinBox->value(), ui->yeDoubleSpinBox->value(), ui->dyDoubleSpinBox->value())
+	};
+}

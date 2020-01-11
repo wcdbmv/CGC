@@ -26,6 +26,7 @@ MainWindow::~MainWindow() noexcept {
 	delete ui;
 }
 
+#include <QMessageBox>
 #include <QtDebug>
 #include "surface/surface.hpp"
 #include "scene/scene.hpp"
@@ -34,10 +35,12 @@ MainWindow::~MainWindow() noexcept {
 
 void MainWindow::on_plotPushButton_clicked() {
 	auto function = ui->functionTableWidget->function(0);
-	grid = {
-		{-5, 5, 1},
-		{-5, 5, 1},
-	};
+	try {
+		grid = ui->gridWidget->getGrid();
+	} catch (...) {
+		QMessageBox::critical(this, "Error", "Wrong range");
+		return;
+	}
 
 	auto mesh = Surface::build(function, grid);
 	Camera camera;

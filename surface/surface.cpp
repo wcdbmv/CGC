@@ -36,7 +36,7 @@ Mesh Surface::build(Function& function, const Grid& grid) {
 
 	for (size_t i = 0; i < xrange.size(); ++i) {
 		for (size_t j = 0; j + 1 < yrange.size(); ++j) {
-			const size_t p1 = i * xrange.size() + j;
+			const size_t p1 = i * yrange.size() + j;
 			const size_t p2 = p1 + 1;
 			edges.emplace_back(p1, p2);
 		}
@@ -44,8 +44,8 @@ Mesh Surface::build(Function& function, const Grid& grid) {
 
 	for (size_t i = 0; i + 1 < xrange.size(); ++i) {
 		for (size_t j = 0; j < yrange.size(); ++j) {
-			const size_t p1 = i * xrange.size() + j;
-			const size_t p2 = p1 + xrange.size();
+			const size_t p1 = i * yrange.size() + j;
+			const size_t p2 = p1 + yrange.size();
 			edges.emplace_back(p1, p2);
 		}
 	}
@@ -53,9 +53,9 @@ Mesh Surface::build(Function& function, const Grid& grid) {
 	size_t inner = outer_grid_size;
 	for (size_t i = 0; i + 1 < xrange.size(); ++i) {
 		for (size_t j = 0; j + 1 < yrange.size(); ++j) {
-			const size_t lt = i * xrange.size() + j;
+			const size_t lt = i * yrange.size() + j;
 			const size_t rt = lt + 1;
-			const size_t lb = lt + xrange.size();
+			const size_t lb = lt + yrange.size();
 			const size_t rb = lb + 1;
 
 			edges.emplace_back(lt, inner);
