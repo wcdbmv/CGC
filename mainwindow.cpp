@@ -157,7 +157,7 @@ void MainWindow::wheelEvent(QWheelEvent* event) {
 		return;
 	}
 
-	addZoom(event->delta() / 8);
+	addZoom(event->delta() / 64);
 
 	on_plotPushButton_clicked();
 }
