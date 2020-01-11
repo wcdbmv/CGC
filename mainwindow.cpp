@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget* parent) :
 
 	connect(ui->appendPushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::append);
 	connect(ui->removePushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::remove);
+	connect(ui->changeColorPushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::changeColor);
 	connect(ui->clearAllPushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::truncate);
 	connect(ui->clearAllPushButton, &QPushButton::clicked, ui->gridWidget, &GridWidget::clear);
 
@@ -60,18 +61,23 @@ void MainWindow::plot() {
 
 	QModelIndexList selected = ui->functionTableWidget->selectionModel()->selectedRows();
 	for (auto select = selected.rbegin(); select != selected.rend(); ++select) {
-		auto function = ui->functionTableWidget->function(select->row());
-		auto mesh = Surface::build(function, grid);
-		plotMesh(mesh, view_matrix);
+		const auto row = select->row();
+		auto function = ui->functionTableWidget->function(row);
+		const auto color = ui->functionTableWidget->color(row);
+		const auto mesh = Surface::build(function, grid);
+		plotMesh(mesh, view_matrix, color);
 	}
 
 	displayImage();
 	plotted = true;
 }
 
-void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix) {
+void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
 	const auto h = ui->drawLabel->height() / 2;
 	const auto w = ui->drawLabel->width() / 2;
+
+	QPainter painter(&pixmap);
+	painter.setPen(color);
 
 	for (auto&& edge: mesh.edges) {
 		if (!std::isfinite(mesh.vertices[edge.p1()].z()) || !std::isfinite(mesh.vertices[edge.p2()].z())) {
@@ -81,7 +87,6 @@ void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix
 		auto p1 = view_matrix * mesh.vertices[edge.p1()];
 		auto p2 = view_matrix * mesh.vertices[edge.p2()];
 
-		QPainter painter(&pixmap);
 		painter.drawLine(
 			w + static_cast<int>(factor * p1.x()), h - static_cast<int>(factor * p1.y()),
 			w + static_cast<int>(factor * p2.x()), h - static_cast<int>(factor * p2.y())

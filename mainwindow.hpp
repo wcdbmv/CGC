@@ -43,7 +43,7 @@ private:
 
 	Grid grid;
 	void plot();
-	void plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix);
+	void plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color);
 	void clearAll();
 
 	const bool zoom = true;

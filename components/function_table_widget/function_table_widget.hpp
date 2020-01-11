@@ -12,11 +12,13 @@ public:
 	explicit FunctionTableWidget(QWidget* parent = nullptr);
 
 	Function& function(int row);
+	QColor color(int row) const;
 
 public slots:
 	void append();
 	void remove();
 	void truncate();
+	void changeColor();
 
 private slots:
 	void on_tableWidget_itemChanged(QTableWidgetItem *item);

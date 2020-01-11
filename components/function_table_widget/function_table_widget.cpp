@@ -1,8 +1,9 @@
 #include "function_table_widget.hpp"
 
+#include <QColorDialog>
 #include <QMessageBox>
 
-const QVector<QColor> FunctionTableWidget::DEFAULT_COLORS = {Qt::blue, Qt::green, Qt::red};
+const QVector<QColor> FunctionTableWidget::DEFAULT_COLORS = {Qt::blue, Qt::darkGreen, Qt::red};
 const QStringList FunctionTableWidget::HEADER_LABELS = {"z(x, y)", "color"};
 const int FunctionTableWidget::COLOR_COLUMN = FunctionTableWidget::HEADER_LABELS.indexOf(QRegExp("^color$"));
 
@@ -17,6 +18,10 @@ FunctionTableWidget::FunctionTableWidget(QWidget *parent) : QTableWidget(parent)
 
 Function& FunctionTableWidget::function(int row) {
 	return functions[row];
+}
+
+QColor FunctionTableWidget::color(int row) const {
+	return item(row, COLOR_COLUMN)->backgroundColor();
 }
 
 void FunctionTableWidget::append() {
@@ -53,7 +58,24 @@ void FunctionTableWidget::truncate() {
 	append();
 }
 
+void FunctionTableWidget::changeColor() {
+	QModelIndexList selected = selectionModel()->selectedRows();
+	if (selected.size() != 1) {
+		QMessageBox::critical(this, "Error", "Please, select 1 row");
+		return;
+	}
+
+	const auto row = selected[0].row();
+	auto colorItem = item(row, COLOR_COLUMN);
+	const auto color = QColorDialog::getColor(colorItem->backgroundColor(), this, "Set color", QColorDialog::DontUseNativeDialog);
+	colorItem->setBackground(color);
+}
+
 void FunctionTableWidget::on_tableWidget_itemChanged(QTableWidgetItem* item) {
+	if (const auto column = item->column(); column == COLOR_COLUMN) {
+		return;
+	}
+
 	const auto input = item->text().trimmed();
 	const auto row = item->row();
 
