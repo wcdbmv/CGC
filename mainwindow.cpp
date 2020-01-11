@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget* parent) :
 
 	connect(ui->appendPushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::append);
 	connect(ui->removePushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::remove);
+	connect(ui->clearAllPushButton, &QPushButton::clicked, ui->functionTableWidget, &FunctionTableWidget::truncate);
+	connect(ui->clearAllPushButton, &QPushButton::clicked, ui->gridWidget, &GridWidget::clear);
 
 	QThread::create([&] {
 		QTimer::singleShot(100, this, &MainWindow::on_clearAllPushButton_clicked);
@@ -98,8 +100,6 @@ void MainWindow::displayImage() {
 
 void MainWindow::clearAll() {
 	plotted = false;
-
-	ui->functionTableWidget->truncate();
 
 	clearImage();
 	displayImage();

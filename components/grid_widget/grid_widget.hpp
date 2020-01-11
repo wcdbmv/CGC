@@ -17,6 +17,9 @@ public:
 
 	Grid grid() const;
 
+public slots:
+	void clear();
+
 private:
 	Ui::GridWidget *ui;
 };

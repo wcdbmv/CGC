@@ -17,3 +17,12 @@ Grid GridWidget::grid() const {
 		Range(ui->ybDoubleSpinBox->value(), ui->yeDoubleSpinBox->value(), ui->dyDoubleSpinBox->value())
 	};
 }
+
+void GridWidget::clear() {
+	ui->xbDoubleSpinBox->setValue(-5);
+	ui->xeDoubleSpinBox->setValue(5);
+	ui->dxDoubleSpinBox->setValue(1);
+	ui->ybDoubleSpinBox->setValue(-5);
+	ui->yeDoubleSpinBox->setValue(5);
+	ui->dyDoubleSpinBox->setValue(1);
+}
