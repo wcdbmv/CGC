@@ -58,8 +58,9 @@ void MainWindow::plot() {
 
 	clearImage();
 
-	for (auto i = 0; i < ui->functionTableWidget->rowCount(); ++i) {
-		auto function = ui->functionTableWidget->function(i);
+	QModelIndexList selected = ui->functionTableWidget->selectionModel()->selectedRows();
+	for (auto select = selected.rbegin(); select != selected.rend(); ++select) {
+		auto function = ui->functionTableWidget->function(select->row());
 		auto mesh = Surface::build(function, grid);
 		plotMesh(mesh, view_matrix);
 	}
