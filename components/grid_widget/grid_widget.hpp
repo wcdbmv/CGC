@@ -15,7 +15,7 @@ public:
 	explicit GridWidget(QWidget *parent = nullptr);
 	~GridWidget();
 
-	Grid getGrid() const;
+	Grid grid() const;
 
 private:
 	Ui::GridWidget *ui;

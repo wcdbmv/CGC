@@ -34,15 +34,21 @@ MainWindow::~MainWindow() noexcept {
 #include <QPainter>
 
 void MainWindow::on_plotPushButton_clicked() {
-	auto function = ui->functionTableWidget->function(0);
+	plot();
+}
+
+void MainWindow::on_clearAllPushButton_clicked() {
+	clearAll();
+}
+
+void MainWindow::plot() {
 	try {
-		grid = ui->gridWidget->getGrid();
+		grid = ui->gridWidget->grid();
 	} catch (...) {
 		QMessageBox::critical(this, "Error", "Wrong range");
 		return;
 	}
 
-	auto mesh = Surface::build(function, grid);
 	Camera camera;
 	camera.RotateUpDownSphere(phi_y);
 	camera.RotateLeftRightSphere(phi_x);
@@ -50,6 +56,17 @@ void MainWindow::on_plotPushButton_clicked() {
 
 	clearImage();
 
+	for (auto i = 0; i < ui->functionTableWidget->rowCount(); ++i) {
+		auto function = ui->functionTableWidget->function(i);
+		auto mesh = Surface::build(function, grid);
+		plotMesh(mesh, view_matrix);
+	}
+
+	displayImage();
+	plotted = true;
+}
+
+void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix) {
 	const auto h = ui->drawLabel->height() / 2;
 	const auto w = ui->drawLabel->width() / 2;
 
@@ -67,13 +84,6 @@ void MainWindow::on_plotPushButton_clicked() {
 			w + static_cast<int>(factor * p2.x()), h - static_cast<int>(factor * p2.y())
 		);
 	}
-
-	displayImage();
-	plotted = true;
-}
-
-void MainWindow::on_clearAllPushButton_clicked() {
-	clearAll();
 }
 
 void MainWindow::clearImage() {

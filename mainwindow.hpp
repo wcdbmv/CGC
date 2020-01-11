@@ -6,6 +6,8 @@
 #include <QImage>
 #include <QPixmap>
 #include "math/grid/grid.hpp"
+#include "math/matrix/matrix4x4.hpp"
+#include "object/mesh/mesh.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +43,7 @@ private:
 
 	Grid grid;
 	void plot();
+	void plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix);
 	void clearAll();
 
 	const bool zoom = true;

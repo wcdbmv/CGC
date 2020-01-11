@@ -11,7 +11,7 @@ GridWidget::~GridWidget() {
 	delete ui;
 }
 
-Grid GridWidget::getGrid() const {
+Grid GridWidget::grid() const {
 	return {
 		Range(ui->xbDoubleSpinBox->value(), ui->xeDoubleSpinBox->value(), ui->dxDoubleSpinBox->value()),
 		Range(ui->ybDoubleSpinBox->value(), ui->yeDoubleSpinBox->value(), ui->dyDoubleSpinBox->value())
