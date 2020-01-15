@@ -35,6 +35,7 @@ MainWindow::~MainWindow() noexcept {
 #include "scene/scene.hpp"
 #include <QVector>
 #include <QPainter>
+#include "render/cascade_renderer/cascade_renderer.hpp"
 
 void MainWindow::on_plotPushButton_clicked() {
 	plotted_meshes.clear();
@@ -71,33 +72,9 @@ void MainWindow::plot() {
 		}
 	}
 
-	for (int i = 0; i < plotted_meshes.size(); ++i) {
-		plotMesh(plotted_meshes[i], view_matrix, plotted_colors[i]);
-	}
+	CascadeRenderer::render(pixmap, plotted_meshes, plotted_colors, view_matrix, factor);
 
 	displayImage();
-}
-
-void MainWindow::plotMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
-	const auto h = ui->drawLabel->height() / 2;
-	const auto w = ui->drawLabel->width() / 2;
-
-	QPainter painter(&pixmap);
-	painter.setPen(color);
-
-	for (auto&& edge: mesh.edges) {
-		if (!std::isfinite(mesh.vertices[edge.p1()].z()) || !std::isfinite(mesh.vertices[edge.p2()].z())) {
-			continue;
-		}
-
-		auto p1 = view_matrix * mesh.vertices[edge.p1()];
-		auto p2 = view_matrix * mesh.vertices[edge.p2()];
-
-		painter.drawLine(
-			w + static_cast<int>(factor * p1.x()), h - static_cast<int>(factor * p1.y()),
-			w + static_cast<int>(factor * p2.x()), h - static_cast<int>(factor * p2.y())
-		);
-	}
 }
 
 bool MainWindow::plotted() const {
