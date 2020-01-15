@@ -12,6 +12,7 @@ class Matrix4x4 : public Matrix<4, T> {
 public:
 	Matrix4x4();
 	Matrix4x4(std::initializer_list<Vector<4, T>>);
+	Matrix4x4(const RectangularMatrix<4, 4, T>&);
 	Matrix4x4(const Matrix4x4&);
 	Matrix4x4(Matrix4x4&&) noexcept;
 	~Matrix4x4() = default;
@@ -28,7 +29,6 @@ public:
 	friend HomogeneousVector3D<U> operator*(const HomogeneousVector3D<U>&, const Matrix4x4<U>&);
 };
 
-
 template <typename T>
 Matrix4x4<T>::Matrix4x4()
 		: Matrix<4, T>() {}
@@ -36,6 +36,10 @@ Matrix4x4<T>::Matrix4x4()
 template <typename T>
 Matrix4x4<T>::Matrix4x4(std::initializer_list<Vector<4, T>> lst)
 		: Matrix<4, T>(lst) {}
+
+template <typename T>
+Matrix4x4<T>::Matrix4x4(const RectangularMatrix<4, 4, T>& rhs)
+		: Matrix<4, T>(rhs) {}
 
 template <typename T>
 Matrix4x4<T>::Matrix4x4(const Matrix4x4<T>& other)

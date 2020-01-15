@@ -12,6 +12,7 @@ public:
 	void set_target(const Vector3D<double>&);
 
 	Matrix4x4<double> get_view_matrix();
+	Matrix4x4<double> get_view_matrix(double);
 
 	void RotateUpDownSphere(double);
 	void RotateLeftRightSphere(double);

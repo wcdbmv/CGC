@@ -22,6 +22,7 @@ public:
 	constexpr static Matrix Identity();
 
 	constexpr Matrix() noexcept = default;
+	constexpr explicit Matrix(const RectangularMatrix<4, 4, T>& rhs) noexcept;
 	constexpr explicit Matrix(T value) noexcept;
 	constexpr Matrix(std::initializer_list<Vector<Size, T>> list) noexcept;
 };
@@ -31,6 +32,10 @@ template <std::size_t Size, typename T>
 constexpr auto Matrix<Size, T>::Identity() -> Matrix {
 	return Matrix(1);
 }
+
+template <std::size_t Size, typename T>
+constexpr Matrix<Size, T>::Matrix(const RectangularMatrix<4, 4, T>& rhs) noexcept:
+		Base(rhs) {}
 
 template <std::size_t Size, typename T>
 constexpr Matrix<Size, T>::Matrix(T value) noexcept

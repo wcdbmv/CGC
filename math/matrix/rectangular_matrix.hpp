@@ -18,6 +18,7 @@ public:
 
 public:
 	constexpr RectangularMatrix() noexcept = default;
+	constexpr RectangularMatrix(const RectangularMatrix& rhs) noexcept;
 	constexpr explicit RectangularMatrix(T value) noexcept;
 	constexpr RectangularMatrix(std::initializer_list<Vector <Cols, T>> list) noexcept;
 
@@ -47,6 +48,11 @@ const RectangularMatrix<L, N, T> operator*(const RectangularMatrix<L, M, T>& m1,
 template <std::size_t Rows, std::size_t Cols, typename T>
 constexpr RectangularMatrix<Rows, Cols, T>::RectangularMatrix(T value) noexcept
 		: data_(Vector<Cols, T>(value)) {}
+
+template <std::size_t Rows, std::size_t Cols, typename T>
+constexpr RectangularMatrix<Rows, Cols, T>::RectangularMatrix(const RectangularMatrix& rhs) noexcept
+		: data_(rhs.data_) {}
+
 
 template <std::size_t Rows, std::size_t Cols, typename T>
 constexpr RectangularMatrix<Rows, Cols, T>::RectangularMatrix(std::initializer_list<Vector<Cols, T>> list) noexcept

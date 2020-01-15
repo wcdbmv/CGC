@@ -86,3 +86,7 @@ Matrix4x4<double> Camera::get_view_matrix() {
 
 	return tmp;
 }
+
+Matrix4x4<double> Camera::get_view_matrix(double factor) {
+	return DimensionalTransformations::Scaling(factor) * get_view_matrix();
+}

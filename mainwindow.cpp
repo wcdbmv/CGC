@@ -58,7 +58,7 @@ void MainWindow::plot() {
 	Camera camera;
 	camera.RotateUpDownSphere(phi_y);
 	camera.RotateLeftRightSphere(phi_x);
-	const auto view_matrix = camera.get_view_matrix();
+	const auto view_matrix = camera.get_view_matrix(factor);
 
 	clearImage();
 
@@ -72,7 +72,7 @@ void MainWindow::plot() {
 		}
 	}
 
-	CascadeRenderer::render(pixmap, plotted_meshes, plotted_colors, view_matrix, factor);
+	CascadeRenderer::render(pixmap, plotted_meshes, plotted_colors, view_matrix);
 
 	displayImage();
 }
