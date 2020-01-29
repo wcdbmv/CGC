@@ -13,6 +13,7 @@ public:
 
 	Matrix4x4<double> get_view_matrix();
 	Matrix4x4<double> get_view_matrix(double);
+	Matrix4x4<double> get_view_matrix(double, double, double);
 
 	void RotateUpDownSphere(double);
 	void RotateLeftRightSphere(double);

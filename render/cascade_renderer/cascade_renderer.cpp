@@ -9,9 +9,6 @@ void CascadeRenderer::render(QPixmap& pixmap, const QVector<Mesh>& meshes, const
 }
 
 void CascadeRenderer::renderMesh(QPixmap& pixmap, const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
-	const auto h = pixmap.height() / 2;
-	const auto w = pixmap.width() / 2;
-
 	QPainter painter(&pixmap);
 	painter.setPen(color);
 
@@ -24,8 +21,8 @@ void CascadeRenderer::renderMesh(QPixmap& pixmap, const Mesh& mesh, const Matrix
 		auto p2 = view_matrix * mesh.vertices[edge.p2()];
 
 		painter.drawLine(
-			w + static_cast<int>(p1.x()), h - static_cast<int>(p1.y()),
-			w + static_cast<int>(p2.x()), h - static_cast<int>(p2.y())
+			static_cast<int>(p1.x()), static_cast<int>(p1.y()),
+			static_cast<int>(p2.x()), static_cast<int>(p2.y())
 		);
 	}
 }

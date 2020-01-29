@@ -58,7 +58,7 @@ void MainWindow::plot() {
 	Camera camera;
 	camera.RotateUpDownSphere(phi_y);
 	camera.RotateLeftRightSphere(phi_x);
-	const auto view_matrix = camera.get_view_matrix(factor);
+	const auto view_matrix = camera.get_view_matrix(factor, pixmap.height() / -2.0, pixmap.width() / 2.0);
 
 	clearImage();
 

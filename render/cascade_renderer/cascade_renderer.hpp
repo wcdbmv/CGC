@@ -14,6 +14,4 @@ private:
 	static void renderMesh(QPixmap& pixmap, const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color);
 };
 
-
-
 #endif  // RENDER_CASCADE_RENDERER_CASCADE_RENDERER_HPP_

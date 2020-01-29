@@ -90,3 +90,6 @@ Matrix4x4<double> Camera::get_view_matrix() {
 Matrix4x4<double> Camera::get_view_matrix(double factor) {
 	return DimensionalTransformations::Scaling(factor) * get_view_matrix();
 }
+Matrix4x4<double> Camera::get_view_matrix(double factor, double h, double w) {
+	return DimensionalTransformations::Translation(Vector3D<double>{w, h, 0}) * get_view_matrix(factor);
+}
