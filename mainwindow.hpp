@@ -8,6 +8,7 @@
 #include "math/grid/grid.hpp"
 #include "object/mesh/mesh.hpp"
 #include "render/cascade_renderer/cascade_renderer.hpp"
+#include "render/solid_renderer/solid_renderer.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -69,6 +70,7 @@ private:
 	[[nodiscard]] bool checkMouseOnDrawLabel(Event* event) const;
 
 	CascadeRenderer cascade_renderer;
+	SolidRenderer solid_renderer;
 
 private:
 	static const QColor BG_COLOR;

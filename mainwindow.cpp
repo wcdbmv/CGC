@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget* parent) :
 	})->start();
 
 	cascade_renderer.setPixmap(&pixmap);
+	solid_renderer.setPixmap(&pixmap);
 }
 
 MainWindow::~MainWindow() noexcept {
@@ -73,7 +74,8 @@ void MainWindow::plot() {
 		}
 	}
 
-	cascade_renderer.render(plotted_meshes, plotted_colors, view_matrix);
+	// cascade_renderer.render(plotted_meshes, plotted_colors, view_matrix);
+	solid_renderer.render(plotted_meshes, plotted_colors, view_matrix);
 
 	displayImage();
 }
@@ -228,5 +230,6 @@ void MainWindow::receiveKey(int key, bool value) {
 }
 
 void MainWindow::resizeEvent(QResizeEvent*) {
+	solid_renderer.resizePixmap();
 	plot();
 }

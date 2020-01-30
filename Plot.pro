@@ -38,6 +38,7 @@ SOURCES += \
 	math/transformation/transformation_interface.cpp \
 	object/camera/camera.cpp \
 	render/cascade_renderer/cascade_renderer.cpp \
+	render/solid_renderer/solid_renderer.cpp \
 	surface/surface.cpp \
 	main.cpp \
 	mainwindow.cpp
@@ -69,8 +70,10 @@ HEADERS += \
 	object/face/face.hpp \
 	object/face/triangle_face.hpp \
 	object/mesh/mesh.hpp \
+	object/triangle/triangle.hpp \
 	object/vertex/vertex.hpp \
 	render/cascade_renderer/cascade_renderer.hpp \
+	render/solid_renderer/solid_renderer.hpp \
 	scene/scene.hpp \
 	surface/surface.hpp \
 	mainwindow.hpp
