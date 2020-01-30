@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget* parent) :
 		ui->functionTableWidget->setColumnWidth(0, 271);
 		ui->functionTableWidget->setColumnWidth(1, 57);
 	})->start();
+
+	cascade_renderer.setPixmap(&pixmap);
 }
 
 MainWindow::~MainWindow() noexcept {
@@ -35,7 +37,6 @@ MainWindow::~MainWindow() noexcept {
 #include "scene/scene.hpp"
 #include <QVector>
 #include <QPainter>
-#include "render/cascade_renderer/cascade_renderer.hpp"
 
 void MainWindow::on_plotPushButton_clicked() {
 	plotted_meshes.clear();
@@ -58,7 +59,7 @@ void MainWindow::plot() {
 	Camera camera;
 	camera.RotateUpDownSphere(phi_y);
 	camera.RotateLeftRightSphere(phi_x);
-	const auto view_matrix = camera.get_view_matrix(factor, pixmap.height() / -2.0, pixmap.width() / 2.0);
+	const auto view_matrix = camera.get_view_matrix(factor, pixmap.height() / 2.0, pixmap.width() / 2.0);
 
 	clearImage();
 
@@ -72,7 +73,7 @@ void MainWindow::plot() {
 		}
 	}
 
-	CascadeRenderer::render(pixmap, plotted_meshes, plotted_colors, view_matrix);
+	cascade_renderer.render(plotted_meshes, plotted_colors, view_matrix);
 
 	displayImage();
 }
@@ -199,30 +200,30 @@ void MainWindow::keyReleaseEvent(QKeyEvent* event) {
 
 void MainWindow::receiveKey(int key, bool value) {
 	switch (key) {
-		case Qt::Key_W:
+	case Qt::Key_W:
 //	case Qt::Key_Up:
-			keyW = value;
-			break;
-		case Qt::Key_A:
+		keyW = value;
+		break;
+	case Qt::Key_A:
 //	case Qt::Key_Left:
-			keyA = value;
-			break;
-		case Qt::Key_S:
+		keyA = value;
+		break;
+	case Qt::Key_S:
 //	case Qt::Key_Down:
-			keyS = value;
-			break;
-		case Qt::Key_D:
+		keyS = value;
+		break;
+	case Qt::Key_D:
 //	case Qt::Key_Right:
-			keyD = value;
-			break;
-		case Qt::Key_Plus:
-			keyPlus = value;
-			break;
-		case Qt::Key_Minus:
-			keyMinus = value;
-			[[fallthrough]];
-		default:
-			break;
+		keyD = value;
+		break;
+	case Qt::Key_Plus:
+		keyPlus = value;
+		break;
+	case Qt::Key_Minus:
+		keyMinus = value;
+		[[fallthrough]];
+	default:
+		break;
 	}
 }
 

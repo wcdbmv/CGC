@@ -2,14 +2,21 @@
 
 #include <QPainter>
 
-void CascadeRenderer::render(QPixmap& pixmap, const QVector<Mesh>& meshes, const QVector<QColor>& colors, const Matrix4x4<double>& view_matrix) {
+CascadeRenderer::CascadeRenderer() noexcept : pixmap_(nullptr) {}
+CascadeRenderer::CascadeRenderer(QPixmap* pixmap) noexcept : pixmap_(pixmap) {}
+
+void CascadeRenderer::setPixmap(QPixmap* pixmap) noexcept {
+	pixmap_ = pixmap;
+}
+
+void CascadeRenderer::render(const QVector<Mesh>& meshes, const QVector<QColor>& colors, const Matrix4x4<double>& view_matrix) {
 	for (int i = 0; i < meshes.size(); ++i) {
-		renderMesh(pixmap, meshes[i], view_matrix, colors[i]);
+		renderMesh(meshes[i], view_matrix, colors[i]);
 	}
 }
 
-void CascadeRenderer::renderMesh(QPixmap& pixmap, const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
-	QPainter painter(&pixmap);
+void CascadeRenderer::renderMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color) {
+	QPainter painter(pixmap_);
 	painter.setPen(color);
 
 	for (auto&& edge: mesh.edges) {

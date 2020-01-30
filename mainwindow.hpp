@@ -7,6 +7,7 @@
 #include <QPixmap>
 #include "math/grid/grid.hpp"
 #include "object/mesh/mesh.hpp"
+#include "render/cascade_renderer/cascade_renderer.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -66,6 +67,8 @@ private:
 	[[nodiscard]] bool checkWheel() const;
 	template <typename Event>
 	[[nodiscard]] bool checkMouseOnDrawLabel(Event* event) const;
+
+	CascadeRenderer cascade_renderer;
 
 private:
 	static const QColor BG_COLOR;

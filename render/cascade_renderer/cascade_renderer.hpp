@@ -8,10 +8,16 @@
 
 class CascadeRenderer {
 public:
-	static void render(QPixmap& pixmap, const QVector<Mesh>& meshes, const QVector<QColor>& colors, const Matrix4x4<double>& view_matrix);
+	CascadeRenderer() noexcept;
+	explicit CascadeRenderer(QPixmap* pixmap) noexcept;
+	void setPixmap(QPixmap* pixmap) noexcept;
+
+	void render(const QVector<Mesh>& meshes, const QVector<QColor>& colors, const Matrix4x4<double>& view_matrix);
 
 private:
-	static void renderMesh(QPixmap& pixmap, const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color);
+	void renderMesh(const Mesh& mesh, const Matrix4x4<double>& view_matrix, const QColor& color);
+
+	QPixmap* pixmap_;
 };
 
 #endif  // RENDER_CASCADE_RENDERER_CASCADE_RENDERER_HPP_
