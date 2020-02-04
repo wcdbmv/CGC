@@ -24,7 +24,7 @@ private:
 	void renderTriangle(const Triangle& triangle, const QColor& color);
 
 	QPixmap* pixmap_;
-	QVector<QVector<int>> buff_;
+	QVector<QVector<double>> buff_;
 };
 
 #endif  // RENDER_SOLID_RENDERER_SOLID_RENDERER_HPP_

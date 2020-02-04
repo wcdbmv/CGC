@@ -6,7 +6,7 @@ SolidRenderer::SolidRenderer() noexcept : pixmap_(nullptr) {}
 
 SolidRenderer::SolidRenderer(QPixmap* pixmap) noexcept :
 		pixmap_(pixmap),
-		buff_(pixmap->height(), QVector<int>(pixmap->width(), std::numeric_limits<int>::max())) {}
+		buff_(pixmap->height(), QVector<double>(pixmap->width(), std::numeric_limits<int>::max())) {}
 
 void SolidRenderer::setPixmap(QPixmap* pixmap) noexcept {
 	pixmap_ = pixmap;
@@ -14,7 +14,7 @@ void SolidRenderer::setPixmap(QPixmap* pixmap) noexcept {
 }
 
 void SolidRenderer::resizePixmap() {
-	buff_ = QVector<QVector<int>>(pixmap_->height(), QVector<int>(pixmap_->width(), std::numeric_limits<int>::max()));
+	buff_ = QVector<QVector<double>>(pixmap_->height(), QVector<double>(pixmap_->width(), std::numeric_limits<int>::max()));
 }
 
 void SolidRenderer::render(const QVector<Mesh>& meshes, const QVector<QColor>& colors, const Matrix4x4<double>& view_matrix) {
@@ -121,7 +121,7 @@ void SolidRenderer::renderTriangle(const Triangle& triangle, const QColor& color
 			if (barCoords.x() >= -std::numeric_limits<double>::epsilon()
 			 && barCoords.y() >= -std::numeric_limits<double>::epsilon()
 			 && barCoords.z() >= -std::numeric_limits<double>::epsilon()) {
-				const auto z = static_cast<int>(1 / (barCoords.x() * triangle[0].z() + barCoords.y() * triangle[1].z() + barCoords.z() * triangle[2].z()));
+				const auto z = (barCoords.x() * triangle[0].z() + barCoords.y() * triangle[1].z() + barCoords.z() * triangle[2].z());
 				if (z <= buff_[j][i]) {
 					buff_[j][i] = z;
 					painter.drawPoint(i, j);
