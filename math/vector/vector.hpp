@@ -51,7 +51,7 @@ public:
 	static constexpr value_type dot(const Vector& lhs, const Vector& rhs) noexcept;
 
 	template <typename _T = T>
-	std::enable_if_t<std::is_integral_v<_T>, double> length() const;
+	std::enable_if_t<std::is_arithmetic_v<_T>, double> length() const;
 
 	template <typename _T = T>
 	std::enable_if_t<std::is_floating_point_v<_T>> normalize();
@@ -247,7 +247,7 @@ constexpr auto Vector<Size, T>::dot(const Vector& lhs, const Vector& rhs) noexce
 
 template <std::size_t Size, typename T>
 template <typename _T>
-auto Vector<Size, T>::length() const -> std::enable_if_t<std::is_integral_v<_T>, double> {
+auto Vector<Size, T>::length() const -> std::enable_if_t<std::is_arithmetic_v<_T>, double> {
 	return std::sqrt(dot(*this, *this));
 }
 

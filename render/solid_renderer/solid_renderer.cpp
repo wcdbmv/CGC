@@ -115,6 +115,13 @@ void SolidRenderer::renderTriangle(const Triangle& triangle, const QColor& color
 	QPainter painter(pixmap_);
 	painter.setPen(color);
 
+	constexpr Vector3D<double> light_dir(0, 0, 1);
+	Vector3D<double> normal = Vector3D<double>::cross(triangle[1] - triangle[0], triangle[2] - triangle[0]);
+	normal.normalize();
+	double intensity = std::abs(Vector<3, double>::dot(normal, light_dir));
+	painter.setPen(QColor(static_cast<int>(color.red() * intensity),
+			      static_cast<int>(color.green() * intensity), static_cast<int>(color.blue() * intensity)));
+
 	for (int i = leftCorner.x(); i <= rightCorner.x(); ++i) {
 		for (int j = leftCorner.y(); j <= rightCorner.y(); ++j) {
 			const auto barCoords = triangle.barycentric(QPoint(i, j), square);

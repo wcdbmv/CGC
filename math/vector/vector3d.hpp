@@ -83,9 +83,9 @@ constexpr auto Vector3D<T>::z() const noexcept -> const_reference {
 template <typename T>
 constexpr auto Vector3D<T>::cross(const Base& lhs, const Base& rhs) noexcept -> Vector3D {
 	return {
-		lhs.y() * rhs.z() - lhs.z() * rhs.y(),
-		lhs.z() * rhs.x() - lhs.x() * rhs.z(),
-		lhs.x() * rhs.y() - lhs.y() * rhs.x()
+		lhs[1] * rhs[2] - lhs[2] * rhs[1],
+		lhs[2] * rhs[0] - lhs[0] * rhs[2],
+		lhs[0] * rhs[1] - lhs[1] * rhs[0]
 	};
 }
 
