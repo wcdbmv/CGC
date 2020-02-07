@@ -38,6 +38,7 @@ MainWindow::~MainWindow() noexcept {
 #include "scene/scene.hpp"
 #include <QVector>
 #include <QPainter>
+#include <QComboBox>
 
 void MainWindow::on_plotPushButton_clicked() {
 	plotted_meshes.clear();
@@ -74,8 +75,16 @@ void MainWindow::plot() {
 		}
 	}
 
-	// cascade_renderer.render(plotted_meshes, plotted_colors, view_matrix);
-	solid_renderer.render(plotted_meshes, plotted_colors, view_matrix);
+	switch (ui->comboBox->currentIndex()) {
+	case 0:
+		solid_renderer.render(plotted_meshes, plotted_colors, view_matrix);
+		break;
+	case 1:
+		cascade_renderer.render(plotted_meshes, plotted_colors, view_matrix);
+		break;
+	default:
+		break;
+	}
 
 	displayImage();
 }
