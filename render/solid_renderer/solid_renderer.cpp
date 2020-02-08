@@ -119,6 +119,7 @@ void SolidRenderer::renderTriangle(const Triangle& triangle, const QColor& color
 	Vector3D<double> normal = Vector3D<double>::cross(triangle[1] - triangle[0], triangle[2] - triangle[0]);
 	normal.normalize();
 	double intensity = std::abs(Vector<3, double>::dot(normal, light_dir));
+	intensity = std::max(intensity, 0.3);
 	painter.setPen(QColor(static_cast<int>(color.red() * intensity),
 			      static_cast<int>(color.green() * intensity), static_cast<int>(color.blue() * intensity)));
 
